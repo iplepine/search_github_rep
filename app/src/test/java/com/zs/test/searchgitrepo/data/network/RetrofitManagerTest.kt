@@ -81,4 +81,14 @@ class RetrofitManagerTest {
             assert(list.size == 500)
         }
     }
+
+    @Test
+    fun testSearchTime() {
+        runBlocking {
+            val start = System.currentTimeMillis()
+            gitService.getRepos("android", 0)
+            val end = System.currentTimeMillis()
+            println("time : ${end-start}ms")
+        }
+    }
 }

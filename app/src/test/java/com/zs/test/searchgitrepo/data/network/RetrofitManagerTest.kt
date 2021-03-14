@@ -1,21 +1,22 @@
 package com.zs.test.searchgitrepo.data.network
 
-import com.zs.test.searchgitrepo.data.network.api.SearchReposService
+import com.zs.test.searchgitrepo.data.network.api.GitService
+import com.zs.test.searchgitrepo.data.network.entity.Repository
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import retrofit2.HttpException
 
 class RetrofitManagerTest {
 
-    private val api by lazy {
-        RetrofitManager.createService(SearchReposService::class.java)
+    private val gitService by lazy {
+        RetrofitManager.createService(GitService::class.java)
     }
 
     @Test
     fun testSearchAndroid() {
         runBlocking {
             val query = "android"
-            val result = api.getRepos(query, 0)
+            val result = gitService.getRepos(query, 0)
             assert(result.totalCount > 0)
             assert(result.items[0].name.contains(query))
         }
@@ -26,7 +27,7 @@ class RetrofitManagerTest {
         runBlocking {
             try {
                 val query = "Android"
-                val result = api.getRepos(query, 11)
+                gitService.getRepos(query, 11)
             } catch (e: HttpException) {
                 val error = RetrofitManager.parseError(e.response())
                 assert(error.getErrorMessage().contains("1000 search results"))
@@ -38,7 +39,7 @@ class RetrofitManagerTest {
     fun testComplexQuery() {
         runBlocking {
             val query = "liverecyclerview user:iplepine"
-            val result = api.getRepos(query, 0)
+            val result = gitService.getRepos(query, 0)
             assert(result.totalCount == 1)
         }
     }
@@ -54,9 +55,12 @@ class RetrofitManagerTest {
                 builder.toString()
             }
             try {
-                val result = api.getRepos(query, 0)
+                gitService.getRepos(query, 0)
             } catch (e: HttpException) {
                 val error = RetrofitManager.parseError(e.response())
+                RetrofitManager.parseError(e.response())
+                RetrofitManager.parseError(e.response())
+                RetrofitManager.parseError(e.response())
                 assert(error.getErrorMessage().contains("longer than 256"))
             }
         }

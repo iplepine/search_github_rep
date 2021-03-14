@@ -4,7 +4,7 @@ import com.zs.test.searchgitrepo.data.network.entity.SearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchReposService {
+interface GitService {
     @GET("/search/repositories")
     suspend fun getRepos(
         @Query("q") query: String,

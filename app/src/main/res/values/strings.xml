@@ -3,4 +3,7 @@
     <string name="action_search">검색</string>
     <string name="hint_query">검색어를 입력해주세요.</string>
     <string name="error_query_empty">검색어를 입력해주세요.</string>
+    <string name="error_result_empty">검색결과가 없습니다.</string>
+    <string name="message_last_page">검색결과가 더 이상 없습니다.</string>
+
 </resources>

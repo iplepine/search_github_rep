@@ -9,6 +9,6 @@ interface GitService {
     suspend fun getRepos(
         @Query("q") query: String,
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int = 100
+        @Query("per_page") perPage: Int = 30
     ): SearchResult
 }

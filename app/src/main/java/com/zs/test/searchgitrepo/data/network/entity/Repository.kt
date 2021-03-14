@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class Repository(
     @SerializedName("full_name")
-    val name: String,
+    val name: String = "",
 
     @SerializedName("description")
-    val description: String,
+    val description: String = "",
 
     @SerializedName("stargazer_count")
-    val starCount: Int,
+    val starCount: Int = 0,
 
     @SerializedName("updated_at")
-    val update: String,
+    val update: String = "",
 
     @SerializedName("url")
-    val url: String
+    val url: String? = null
 )

@@ -65,4 +65,20 @@ class RetrofitManagerTest {
             }
         }
     }
+
+    @Test
+    fun testSearch5Pages() {
+        runBlocking {
+            val list = ArrayList<Repository>()
+            val query = "android"
+            var page = 0
+
+            repeat(5) {
+                val result = gitService.getRepos(query, page++)
+                list.addAll(result.items)
+            }
+
+            assert(list.size == 500)
+        }
+    }
 }
